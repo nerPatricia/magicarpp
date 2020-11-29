@@ -1,0 +1,33 @@
+ion-content {
+  --ion-padding: 0 !important;
+}
+
+ion-segment {
+  --background: rgba(221, 221, 221);
+  height: 5vh;
+  margin-top: 10px;
+
+  .segment-button-checked {
+    color: var(--ion-color-tertiary);
+    --background-checked: rgba(221, 221, 221);
+
+    ion-label {
+      color: grey;
+      background-color: #ffffff;
+      border: solid 1px transparent;
+      border-radius: 5px;
+      padding: 1px 10px;
+      --box-shadow: 0px 2px 5px #818181;
+      -webkit-box-shadow: 0px 2px 5px #818181;
+      // -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.160);
+      opacity: 1;
+    }
+  }
+
+  ion-segment-button {
+    ion-label {
+      margin-top: 2px;
+      color: white;
+    }
+  }
+}

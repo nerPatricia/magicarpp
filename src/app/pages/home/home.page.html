@@ -1,0 +1,23 @@
+<app-header showButtonBack="/dashboard" title="Comprar Créditos"></app-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-segment (ionChange)="segmentChanged($event)" value="1">
+      <ion-segment-button style="background-color: #00b643" value="1">
+        <ion-label>Cards em Alta</ion-label>
+      </ion-segment-button>
+      <ion-segment-button style="background-color: #ff2020" value="2">
+        <ion-label>Cards em Baixa</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-slides #slides (ionSlideDidChange)="slideChanged($event)" scrollbar="false">
+      <ion-slide>
+        <app-rank-list [cardList]="rankListAltas" style="width: 100%;"></app-rank-list>
+      </ion-slide>
+      <ion-slide>
+        <app-rank-list [cardList]="rankListBaixas" style="width: 100%;"></app-rank-list>
+      </ion-slide>
+    </ion-slides>
+  </ion-grid>
+</ion-content>
