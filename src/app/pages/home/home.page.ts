@@ -1,3 +1,4 @@
+import { NavigationExtras, Router } from '@angular/router';
 import { EndpointService } from './../../service/endpoint.service';
 import { AdvancedSearchPage } from './../advanced-search/advanced-search.page';
 import { IonSlides, ModalController, NavController } from '@ionic/angular';
@@ -27,7 +28,8 @@ export class HomePage implements OnInit {
     private modalCtrl: ModalController,
     private endpointService: EndpointService,
     private navCtrl: NavController,
-    private verifica: ChangeDetectorRef
+    private verifica: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -66,18 +68,16 @@ export class HomePage implements OnInit {
   }
 
   openAdvencedSearchModal(event) {
-    this.presentModal(event.searchInput);
+    this.redirect(event.searchInput);
   }
 
-  async presentModal(cardName) {
-    const modal = await this.modalCtrl.create({
-      component: AdvancedSearchPage,
-      cssClass: 'default-modal',
-      componentProps: {
+  redirect(cardName) {
+    const navigationExtras: NavigationExtras = {
+      state: { 
         cardName: cardName,
         currency: this.currency
       }
-    });
-    return await modal.present();
+    };
+    this.router.navigate(['advanced-search'], navigationExtras);
   }
 }

@@ -13,7 +13,7 @@ export class EndpointService {
   async searchCard(card: any) {
     const url = this.url + '/mongo/search?&name='+card.name+'&collection='+card.collection+'&cmc='+card.cmc+'&rarity='+card.rarity+
     '&legalities='+card.legalities+'&power='+card.power+'&toughness='+card.toughness+'&keywords='+card.keywords+
-    '&usd_max='+card.usd_max+'&usd_min='+card.usd_min+'&eur_max='+card.eur_max+'&eur_min='+card.eur_min;
+    '&usd_max='+card.usd_max+'&usd_min='+card.usd_min+'&eur_max='+card.eur_max+'&eur_min='+card.eur_min+'&colors='+card.color+'&limit=100';
     console.log(url);
     return this.http.get(url).toPromise();
   }

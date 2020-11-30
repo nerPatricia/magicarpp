@@ -1,18 +1,18 @@
 import { LoadingService } from './../../service/loading.service';
-import { NavigationExtras, Router } from '@angular/router';
+import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
 import { EndpointService } from './../../service/endpoint.service';
 import Swal from 'sweetalert2';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-advanced-search',
-  templateUrl: './advanced-search.page.html',
-  styleUrls: ['./advanced-search.page.scss'],
+  templateUrl: 'advanced-search.page.html',
+  styleUrls: ['advanced-search.page.scss'],
 })
 export class AdvancedSearchPage {
   card: any = {
-    name: '',
+    name: ' ',
     collection: '', // um select a partir de um getAllCollections
     usd_max: '',
     eur_max: '',
@@ -29,14 +29,18 @@ export class AdvancedSearchPage {
   currency = 'usd';
 
   constructor(
-    private navParams: NavParams, 
-    private modalCtrl: ModalController,
     private endpoint: EndpointService,
+    private navCtrl: NavController,
     private router: Router,
+    private route: ActivatedRoute,
     private loading: LoadingService
   ) {
-    this.card.name = this.navParams.get('cardName');
-    this.currency = this.navParams.get('currency');
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.card.name  = this.router.getCurrentNavigation().extras.state.cardList || '';
+        this.currency = this.router.getCurrentNavigation().extras.state.currency;
+      }
+    });
   }
 
   search() {
@@ -63,25 +67,19 @@ export class AdvancedSearchPage {
       return;
     }
     console.log(this.card);
-    this.loading.present();
 
     this.endpoint.searchCard(this.card).then(
       (response: any) => {
-        this.loading.dismiss();
         const navigationExtras: NavigationExtras = {
           state: { 
-            cardList: response
+            cardList: response,
+            currency: this.currency
           }
         };
         this.router.navigate(['card-list'], navigationExtras);
       }, error => {
-        this.loading.dismiss();
         console.log(error);
       }
     );
-  }
-
-  closeModal() {
-    this.modalCtrl.dismiss();
   }
 }

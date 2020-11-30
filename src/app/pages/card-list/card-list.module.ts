@@ -1,3 +1,4 @@
+import { AdvancedSearchPageModule } from './../advanced-search/advanced-search.module';
 import { LoadingService } from './../../service/loading.service';
 import { ToastService } from '../../service/toast.service';
 import { NgModule } from '@angular/core';

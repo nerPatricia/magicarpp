@@ -1,14 +1,13 @@
-<app-header showButtonBack="/dashboard" title="Comprar Créditos"></app-header>
+<app-header (eventEmitter)="openAdvencedSearchModal($event)">
+</app-header>
 
 <ion-content class="ion-padding">
   <ion-grid>
-    <ion-list>
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-        </ion-thumbnail>
-        <ion-label>Item Thumbnail</ion-label>
-      </ion-item>
-    </ion-list>
+    <ion-row>
+      <ion-col size="6" style="text-align: center" *ngFor="let card of cardList.docs; index as i">
+        <img src="{{ card.image_uris.small }}" />
+        <p class="title">{{ card.name }} </p>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>

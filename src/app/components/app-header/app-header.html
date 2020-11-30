@@ -1,19 +1,24 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      <div class="ion-text-center"><img src="assets/imgs/logo.png" /></div>
+      <div *ngIf="logo" class="ion-text-center"><img src="assets/imgs/logo.png" /></div>
+      <span *ngIf="!logo" style="color: white;">BUSCA AVANÇADA</span>
     </ion-title>
-    <ion-menu-button style="color: white" slot="start" autoHide="true"></ion-menu-button>
+    <ion-menu-button *ngIf="allOptions" style="color: white" slot="start" autoHide="true"></ion-menu-button>
 
-    <ion-item slot="end" lines="none">
+    <ion-buttons *ngIf="showButtonBack" slot="start" style="color: white">
+      <ion-back-button [defaultHref]="'/'"></ion-back-button>
+    </ion-buttons>
+
+    <ion-item slot="end" lines="none" *ngIf="allOptions">
       <ion-select [(ngModel)]="currency" (ionChange)="changeCurrency($event)">
         <ion-select-option value="usd">Dólar</ion-select-option>
         <ion-select-option value="eur">Euro</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-toolbar>
-  <ion-searchbar [(ngModel)]="searchInput" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"
-    placeholder="Procure por cards">
+  <ion-searchbar *ngIf="allOptions" [(ngModel)]="searchInput" (ionInput)="onInput($event)"
+    (ionCancel)="onCancel($event)" placeholder="Procure por cards">
   </ion-searchbar>
-  <p id="adv-search" (click)="sendSearchInputToModal()">Busca Avançada</p>
+  <p id="adv-search" *ngIf="allOptions" (click)="sendSearchInputToModal()">Busca Avançada</p>
 </ion-header>

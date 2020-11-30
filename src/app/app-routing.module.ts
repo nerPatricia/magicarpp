@@ -21,7 +21,12 @@ const routes: Routes = [
     path: 'card-list',
     loadChildren:
       './pages/card-list/card-list.module#CardListPageModule'
-  }
+  },
+  {
+    path: 'advanced-search',
+    loadChildren:
+      './pages/advanced-search/advanced-search.module#AdvancedSearchPageModule'
+  },
 ];
 
 @NgModule({

@@ -1,15 +1,5 @@
 <!-- name collection usd_max eur_max usd_min eur_min cmc rarity legalities releaseDate_max releaseDate_min power toughness keywords-->
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      <span>BUSCA AVANÇADA</span>
-    </ion-title>
-    <ion-buttons slot="end" (click)="closeModal()">
-      <ion-icon class="icon" name="close-circle"></ion-icon>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
+<app-header [showButtonBack]="true" [allOptions]="false" [logo]="false"></app-header>
 
 <ion-content class="ion-padding">
   <ion-grid>

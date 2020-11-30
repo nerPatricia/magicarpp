@@ -1,8 +1,9 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { AdvancedSearchPage } from './../advanced-search/advanced-search.page';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { ToastService } from '../../service/toast.service';
 import Swal from 'sweetalert2';
 
-import { NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,28 +12,59 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['card-list.page.scss'],
 })
 export class CardListPage implements OnInit {
-  cardList = [];
+  cardList: any = [];
+  currency = 'usd';
 
   constructor(
     private navCtrl: NavController,  
     private toast: ToastService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modalCtrl: ModalController
   ) {
+    
+  }
+
+  ionViewWillEnter(){
+   
+
+    console.log(this.cardList);
+  }
+
+  ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.cardList = this.router.getCurrentNavigation().extras.state.cardList;
+        this.currency = this.router.getCurrentNavigation().extras.state.currency;
       }
     });
   }
 
-  ngOnInit() {}
-
   goToDetails(card) {
+    const navigationExtras: NavigationExtras = {
+      state: { 
+        cardName: card,
+        currency: this.currency
+      }
+    };
     this.navCtrl.navigateForward(['card-details']);
   }
 
   back() {
     this.navCtrl.navigateForward(['']);
+  }
+
+  openAdvencedSearchModal(event) {
+    this.redirectToAdvancedSearch(event.searchInput);
+  }
+
+  redirectToAdvancedSearch(cardName) {
+    const navigationExtras: NavigationExtras = {
+      state: { 
+        cardName: cardName,
+        currency: this.currency
+      }
+    };
+    this.router.navigate(['advanced-search'], navigationExtras);
   }
 }

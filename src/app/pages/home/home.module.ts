@@ -27,7 +27,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     AppHeaderModule,
     AppRankListModule,
-    AdvancedSearchPageModule,
     RouterModule.forChild(routes)
   ],
   declarations: [HomePage],

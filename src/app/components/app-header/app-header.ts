@@ -10,7 +10,11 @@ import { Router } from '@angular/router';
 export class AppHeaderComponent {
   searchInput: string = '';
   @Input()
-  showButtonBack: string = '';
+  showButtonBack = false;
+  @Input()
+  allOptions = true;
+  @Input()
+  logo = true;
   @Input()
   showSelectCurrency: boolean = true;
   @Input()
