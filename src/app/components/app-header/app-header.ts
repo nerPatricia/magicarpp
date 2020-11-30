@@ -32,7 +32,7 @@ export class AppHeaderComponent {
     private router: Router
   ) {}
 
-  helpModal() {
+  goToHome() {
     this.navCtrl.navigateForward('/');
   }
 

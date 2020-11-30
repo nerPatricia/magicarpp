@@ -21,13 +21,9 @@ export class CardListPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private modalCtrl: ModalController
-  ) {
-    
-  }
+  ) {}
 
   ionViewWillEnter(){
-   
-
     console.log(this.cardList);
   }
 
@@ -43,11 +39,11 @@ export class CardListPage implements OnInit {
   goToDetails(card) {
     const navigationExtras: NavigationExtras = {
       state: { 
-        cardName: card,
+        card: card,
         currency: this.currency
       }
     };
-    this.navCtrl.navigateForward(['card-details']);
+    this.navCtrl.navigateForward(['card-details'], navigationExtras);
   }
 
   back() {

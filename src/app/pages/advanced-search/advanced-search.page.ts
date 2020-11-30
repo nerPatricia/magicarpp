@@ -78,6 +78,12 @@ export class AdvancedSearchPage {
         };
         this.router.navigate(['card-list'], navigationExtras);
       }, error => {
+        Swal.fire({
+          title: 'Atenção',
+          text: 'Nenhum resultado encontrando com esses parametros',
+          icon: 'warning',
+          confirmButtonText: 'OK'
+        });
         console.log(error);
       }
     );

@@ -32,7 +32,9 @@ export class HomePage implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewDidEnter() {
     this.endpointService.rankUp().then(
       (response: any) => {
         this.allRanks.altas.usd = response.usd;

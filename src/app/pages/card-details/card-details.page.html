@@ -1,54 +1,66 @@
-<app-header showButtonBack="/dashboard" title="Saldo: R$ {{ saldo }}" showButtonAddCredits="true"></app-header>
+<app-header (eventEmitter)="openAdvencedSearchModal($event)">
+</app-header>
 
 <ion-content>
   <ion-grid>
-    <ion-row class="car-info">
-      <ion-col style="text-align: center; padding: 14px 0;">
-        <span class="title">{{ carroData?.placa.toUpperCase() }}</span>
-      </ion-col>
-    </ion-row>
-    <ion-row style="margin-top: 20px;">
-      <ion-col size="12">
-        <ion-label class="title">Código da Vaga:</ion-label>
-      </ion-col>
-      <ion-col size="12" style="align-self: center;">
-        <ion-list id="form">
-          <ion-item style="margin-bottom: 10px;">
-            <ion-input autocomplete type="text" placeholder="Numero" maxlength="3">
-            </ion-input>
+    <ion-row>
+      <ion-col style="text-align: center">
+        <img src="{{ cardDetails?.image_uris?.normal }}" style="max-width: 80%;" />
+        <ion-list style="border: 1px solid #b8b8b8; border-radius: 4px; margin-top: 15px;">
+          <ion-item>
+            <p class="title">{{ cardDetails.name }} {{cardDetails.mana_coast}} </p>
+          </ion-item>
+          <ion-item>
+            <p>{{ cardDetails.type_line }} </p>
+          </ion-item>
+          <ion-item>
+            <p>{{ cardDetails.oracle_text }} </p>
+          </ion-item>
+          <ion-item>
+            <p>Ilustrado por: {{ cardDetails.artist }} </p>
+          </ion-item>
+          <ion-item>
+            <ion-row style="margin-top: 4px">
+              <ion-col size="6" style="text-align: center"
+                [style.background-color]="cardDetails.legalities?.brawl === 'legal' ? '#4fc47a' : '#f8c9a3'">
+                <p style="color: white; font-weight: 500;">Brawl</p>
+              </ion-col>
+              <ion-col size="6" style="text-align: center"
+                [style.background-color]="cardDetails.legalities?.commander === 'legal' ? '#4fc47a' : '#f8c9a3'">
+                <p style="color: white; font-weight: 500;">Commander</p>
+              </ion-col>
+              <ion-col size="6" style="text-align: center"
+                [style.background-color]="cardDetails.legalities?.historic === 'legal' ? '#4fc47a' : '#f8c9a3'">
+                <p style="color: white; font-weight: 500;">Historic</p>
+              </ion-col>
+              <ion-col size="6" style="text-align: center"
+                [style.background-color]="cardDetails.legalities?.legacy === 'legal' ? '#4fc47a' : '#f8c9a3'">
+                <p style="color: white; font-weight: 500;">Legacy</p>
+              </ion-col>
+              <ion-col size="6" style="text-align: center; color: white; font-weight: 500;"
+                [style.background-color]="cardDetails.legalities?.modern === 'legal' ? '#4fc47a' : '#f8c9a3'">
+                <p style="color: white; font-weight: 500;">Modern</p>
+              </ion-col>
+              <ion-col size="6" style="text-align: center"
+                [style.background-color]="cardDetails.legalities?.pauper === 'legal' ? '#4fc47a' : '#f8c9a3'">
+                <p style="color: white; font-weight: 500;">Pauper</p>
+              </ion-col>
+              <ion-col size="6" style="text-align: center"
+                [style.background-color]="cardDetails.legalities?.pioneer === 'legal' ? '#4fc47a' : '#f8c9a3'">
+                <p style="color: white; font-weight: 500;">Pioneer</p>
+              </ion-col>
+              <ion-col size="6" style="text-align: center"
+                [style.background-color]="cardDetails.legalities?.standard === 'legal' ? '#4fc47a' : '#f8c9a3'">
+                <p style="color: white; font-weight: 500;">Standard</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item>
+            <ion-card-content style="width: 100%;">
+              <canvas #lineChart></canvas>
+            </ion-card-content>
           </ion-item>
         </ion-list>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label class="title">Quanto tempo você deseja estacionar?</ion-label>
-      </ion-col>
-      <ion-col>
-        <ion-list id="form">
-          <ion-radio-group [(ngModel)]="estacionarData.duracao">
-            <ion-item lines="none">
-              <ion-label>1 hora - R$ 3,00</ion-label>
-              <ion-radio slot="start" value="1"></ion-radio>
-            </ion-item>
-            <ion-item lines="none">
-              <ion-label>2 hora - R$ 6,00</ion-label>
-              <ion-radio slot="start" value="2"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-    <ion-row style="display: flex; justify-content: space-between;">
-      <ion-col>
-        <button class="btn" style="background-color: #c80000;" ion-button (click)="back()">
-          Cancelar
-        </button>
-      </ion-col>
-      <ion-col>
-        <button class="btn" primary ion-button (click)="avancar()">
-          Estacionar
-        </button>
       </ion-col>
     </ion-row>
   </ion-grid>

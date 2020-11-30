@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      <div *ngIf="logo" class="ion-text-center"><img src="assets/imgs/logo.png" /></div>
+      <div *ngIf="logo" class="ion-text-center" (click)="goToHome()"><img src="assets/imgs/logo.png" /></div>
       <span *ngIf="!logo" style="color: white;">BUSCA AVANÇADA</span>
     </ion-title>
     <ion-menu-button *ngIf="allOptions" style="color: white" slot="start" autoHide="true"></ion-menu-button>
 
     <ion-buttons *ngIf="showButtonBack" slot="start" style="color: white">
-      <ion-back-button [defaultHref]="'/'"></ion-back-button>
+      <ion-icon (click)="goToHome()" name="arrow-back-outline" style="margin-left: 20px; font-size: larger;"></ion-icon>
     </ion-buttons>
 
     <ion-item slot="end" lines="none" *ngIf="allOptions">

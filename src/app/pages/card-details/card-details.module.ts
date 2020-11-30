@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { Routes, RouterModule } from '@angular/router';
 import { AppHeaderModule } from 'src/app/components/app-header/app-header.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Chart } from 'chart.js';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
     IonicModule,
     ReactiveFormsModule,
     AppHeaderModule,
+    // Chart,
     NgxMaskModule.forRoot(),
     RouterModule.forChild(routes)
   ],

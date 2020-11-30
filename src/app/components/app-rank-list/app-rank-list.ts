@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, AfterViewInit, OnChanges } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-rank-list',
@@ -24,12 +24,18 @@ export class AppRankListComponent implements OnChanges {
   ) {}
 
   ngOnChanges() {
-    console.log(this.allCards);
-    console.log(this.currency);
-    console.log(this.rankFlag);
+   console.log(this.allCards);
+   console.log("carregou");
   }
 
-  goToCardDetails() {
-    // this.navCtrl.navigateForward('/adicionar-creditos');
+  goToDetails(card) {
+    console.log(card);
+    const navigationExtras: NavigationExtras = {
+      state: { 
+        card: card,
+        currency: this.currency
+      }
+    };
+    this.navCtrl.navigateForward(['card-details'], navigationExtras);
   }
 }
