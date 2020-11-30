@@ -26,6 +26,8 @@ export class AppHeaderComponent {
 
   @Output()
   public eventEmitter: EventEmitter<any> = new EventEmitter();
+  @Output()
+  public changeCurrencyEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public navCtrl: NavController, 
@@ -47,7 +49,7 @@ export class AppHeaderComponent {
   }
 
   changeCurrency(event) {
-    this.eventEmitter.emit({
+    this.changeCurrencyEmitter.emit({
       currency: this.currency
     });
   }

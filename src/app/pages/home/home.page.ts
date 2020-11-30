@@ -66,6 +66,7 @@ export class HomePage implements OnInit {
     if(event.currency != this.currency) {
       this.currency = event.currency;
       this.verifica.detectChanges();
+      console.log("reloadranks");
     }
   }
 
