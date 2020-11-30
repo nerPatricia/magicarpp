@@ -1,5 +1,4 @@
 import Swal from 'sweetalert2';
-import { UtilitiesService } from '../../service/utilities.service';
 import { ToastService } from '../../service/toast.service';
 import { NavController } from '@ionic/angular';
 import { Component } from '@angular/core';
@@ -24,7 +23,6 @@ export class CardDetailsPage {
     private route: ActivatedRoute,
     private router: Router,
     private toast: ToastService,
-    private utilitiesService: UtilitiesService
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -50,16 +48,6 @@ export class CardDetailsPage {
 
     console.log(this.estacionarData);
 
-    this.utilitiesService.estacionar(this.estacionarData).then(
-      (response: any) => {
-        Swal.fire('Sucesso', 'Carro cadastrado com sucesso.', 'success').then(
-          () => {
-            this.navCtrl.navigateForward(['dashboard']);
-          }
-        );
-      }, error => {
-        Swal.fire('Atenção', 'Ocorreu um erro ao estacionar. Tente novamente mais tarde.', 'error');
-      }
-    );
+
   }  
 }

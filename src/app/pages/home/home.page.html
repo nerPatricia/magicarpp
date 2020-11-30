@@ -1,8 +1,9 @@
-<app-header showButtonBack="/dashboard" title="Comprar Créditos"></app-header>
+<app-header showButtonBack="/dashboard" (eventEmitter)="openAdvencedSearchModal($event)"
+  (eventEmitter)="reloadRanksByCurrency($event)"></app-header>
 
 <ion-content class="ion-padding">
-  <ion-grid>
-    <ion-segment (ionChange)="segmentChanged($event)" value="1">
+  <ion-grid style="padding: 0;">
+    <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="segmentFlag">
       <ion-segment-button style="background-color: #00b643" value="1">
         <ion-label>Cards em Alta</ion-label>
       </ion-segment-button>
@@ -11,12 +12,16 @@
       </ion-segment-button>
     </ion-segment>
 
-    <ion-slides #slides (ionSlideDidChange)="slideChanged($event)" scrollbar="false">
+    <ion-slides #slides class="swiper-no-swiping" scrollbar="false">
       <ion-slide>
-        <app-rank-list [cardList]="rankListAltas" style="width: 100%;"></app-rank-list>
+        <app-rank-list [allCards]="currency === 'usd' ? allRanks.altas.usd : allRanks.altas.eur" rankFlag="altas"
+          style="width: 100%;">
+        </app-rank-list>
       </ion-slide>
       <ion-slide>
-        <app-rank-list [cardList]="rankListBaixas" style="width: 100%;"></app-rank-list>
+        <app-rank-list [allCards]="currency === 'usd' ? allRanks.baixas.usd : allRanks.baixas.eur" rankFlag="baixas"
+          style="width: 100%;">
+        </app-rank-list>
       </ion-slide>
     </ion-slides>
   </ion-grid>

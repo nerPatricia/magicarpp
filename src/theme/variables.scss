@@ -30,20 +30,20 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 
 /** Ionic CSS Variables **/
 
-// primary: #34495c,
-// secondary: #253442,
-// danger: #f53d3d,
-// light: #f4f4f4,
-// dark: #222,
-// green: #0fa122,
-// orange: #da8d36,
-// grey: #e8e8e8,
-// dark_grey: #bdbdbd
 :root {
-  --ion-color-primary: #f9f9f9;
+  // --primary: #34495c;
+  // --secondary: #253442;
+  // --danger: #f53d3d;
+  // --light: #f4f4f4;
+  // --dark: #222;
+  // --green: #0fa122;
+  // --grey: #e8e8e8;
+  // --dark_grey: #bdbdbd;
+
+  --ion-color-primary: #e88300;
   --ion-color-secondary: #0073c8;
   --ion-color-tertiary: #0c4169;
-  --ion-color-grey: #e8e8e8;
+  --ion-color-grey: #ffffff;
   --ion-color-dark-grey: #bdbdbd;
   --ion-color-grey-text: #7e7e7e;
   --ion-color-dark-text: #474747;

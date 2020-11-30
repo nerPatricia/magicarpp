@@ -47,3 +47,28 @@ ion-header {
 ion-searchbar {
   --ion-background-color: white;
 }
+
+img {
+  max-width: 82%;
+  margin-right: -36px;
+}
+
+ion-item {
+  height: 30px;
+  margin-right: 10px;
+  border: 1px solid;
+  border-radius: 4px;
+  border-color: rgb(196, 196, 196);
+  --background: white;
+  margin-bottom: 10px;
+  margin-top: 4px;
+
+  ::placeholder {
+    color: #bec4c6;
+  }
+}
+
+ion-select {
+  padding: 0 0 20px;
+  max-width: 100%;
+}

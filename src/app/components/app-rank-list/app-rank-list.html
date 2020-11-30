@@ -1,19 +1,24 @@
 <ion-list class="ion-no-padding">
-  <ion-item *ngFor="let card of cardList; index as i" [ngClass]="i % 2 == 0 ? 'fundoClaro' : 'fundoEscuro'"
+  <ion-item *ngFor="let card of allCards; index as i" [ngClass]="i % 2 == 0 ? 'fundoClaro' : 'fundoEscuro'"
     (click)="goToCardDetails(card)">
     <ion-label>
       <ion-row>
         <ion-col size="1">
-          <ion-icon name="arrow-up" [ngClass]="card ? 'value-alta' : 'value-baixa'"> </ion-icon>
+          <ion-icon [name]="rankFlag === 'altas' ? 'arrow-up' : 'arrow-down'"
+            [ngClass]="rankFlag === 'altas' ? 'value-alta' : 'value-baixa'">
+          </ion-icon>
         </ion-col>
         <ion-col size="2">
-          <p class="value-alta">+3,99</p>
+          <p [ngClass]="rankFlag === 'altas' ? 'value-alta' : 'value-baixa'">
+            {{ (rankFlag === 'altas' ? '+' : '') + (card.usd_variation ? card.usd_variation : card.eur_variation)}}
+          </p>
         </ion-col>
         <ion-col size="6">
-          <p class="title">Fera das Demandas</p>
+          <p class="title">{{ card.name }}</p>
         </ion-col>
         <ion-col size="2">
-          <p class="value-alta">R$300,00</p>
+          <p [ngClass]="rankFlag === 'altas' ? 'value-alta' : 'value-baixa'">
+            {{ card.usd_variation ? 'USD ' + card.prices[0].usd : 'EUR ' + card.prices[0].eur }}</p>
         </ion-col>
       </ion-row>
     </ion-label>

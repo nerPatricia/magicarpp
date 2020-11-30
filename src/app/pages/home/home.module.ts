@@ -1,3 +1,9 @@
+import { EndpointService } from './../../service/endpoint.service';
+import { AdvancedSearchPageModule } from './../advanced-search/advanced-search.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastService } from './../../service/toast.service';
+import { LoadingService } from './../../service/loading.service';
+import { AdvancedSearchPage } from './../advanced-search/advanced-search.page';
 import { AppRankListModule } from './../../components/app-rank-list/app-rank-list.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,11 +22,15 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     IonicModule,
+    ReactiveFormsModule,
     AppHeaderModule,
     AppRankListModule,
+    AdvancedSearchPageModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
+  providers: [LoadingService, ToastService, EndpointService]
 })
 export class HomePageModule {}

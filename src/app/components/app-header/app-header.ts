@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +8,6 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['app-header.scss']
 })
 export class AppHeaderComponent {
-  @Input()
   searchInput: string = '';
   @Input()
   showButtonBack: string = '';
@@ -20,16 +18,14 @@ export class AppHeaderComponent {
   @Input()
   iconTitle: string = '';
 
-  // TODO: Juntar os botões do mesmo lado em um só e usar função verificadora
-  // diminuindo a qtd de flags
+  currency = 'usd';
 
   @Output()
   public eventEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public navCtrl: NavController, 
-    private router: Router,
-    private authService: AuthService
+    private router: Router
   ) {}
 
   helpModal() {
@@ -38,6 +34,18 @@ export class AppHeaderComponent {
 
   goToAddCredits() {
     this.navCtrl.navigateForward('/adicionar-creditos');
+  }
+
+  sendSearchInputToModal() {
+    this.eventEmitter.emit({
+      searchInput: this.searchInput
+    });
+  }
+
+  changeCurrency(event) {
+    this.eventEmitter.emit({
+      currency: this.currency
+    });
   }
 
   onInput(event) {

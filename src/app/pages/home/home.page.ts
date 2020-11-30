@@ -1,5 +1,7 @@
-import { IonSlides, NavController } from '@ionic/angular';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { EndpointService } from './../../service/endpoint.service';
+import { AdvancedSearchPage } from './../advanced-search/advanced-search.page';
+import { IonSlides, ModalController, NavController } from '@ionic/angular';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -7,23 +9,46 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  rankListAltas = [
-    {
-      cardName: '',
-      price: ''
+  allRanks = {
+    altas: {
+      usd: [],
+      eur: []
+    },
+    baixas: {
+      usd: [],
+      eur: []
     }
-  ];
-  rankListBaixas = [
-    {
-      cardName: '',
-      price: ''
-    }
-  ];
+  };
+  currency = 'usd';
+  segmentFlag = 1;
   @ViewChild('slides') slides: IonSlides;
 
-  constructor(private navCtrl: NavController) {}
+  constructor(
+    private modalCtrl: ModalController,
+    private endpointService: EndpointService,
+    private navCtrl: NavController,
+    private verifica: ChangeDetectorRef
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.endpointService.rankUp().then(
+      (response: any) => {
+        this.allRanks.altas.usd = response.usd;
+        this.allRanks.altas.eur = response.eur;
+      }, (error) => {
+        console.log(error);
+      }
+    );
+
+    this.endpointService.rankDown().then(
+      (response: any) => {
+        this.allRanks.baixas.usd = response.usd;
+        this.allRanks.baixas.eur = response.eur;
+      }, (error) => {
+        console.log(error);
+      }
+    );
+  }
 
   async segmentChanged(ev: any) {
     if (await this.slides.getActiveIndex() == 0) {
@@ -33,7 +58,26 @@ export class HomePage implements OnInit {
     }
   }
 
-  async slideChanged(event) {
-    
+  reloadRanksByCurrency(event) {
+    if(event.currency != this.currency) {
+      this.currency = event.currency;
+      this.verifica.detectChanges();
+    }
+  }
+
+  openAdvencedSearchModal(event) {
+    this.presentModal(event.searchInput);
+  }
+
+  async presentModal(cardName) {
+    const modal = await this.modalCtrl.create({
+      component: AdvancedSearchPage,
+      cssClass: 'default-modal',
+      componentProps: {
+        cardName: cardName,
+        currency: this.currency
+      }
+    });
+    return await modal.present();
   }
 }

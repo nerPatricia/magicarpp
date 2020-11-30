@@ -28,7 +28,7 @@
 
 // cor do background
 ion-content {
-    --ion-background-color: var(--ion-color-primary) !important;
+    --ion-background-color: var(--ion-color-grey) !important;
 }
 
 // diminui a sombra do header 
@@ -46,6 +46,11 @@ ion-content {
     --highlight-background: none !important;
 }
 
+// tira a borda dos input e deixa igual o ion-input
+input {
+    border: 0;
+}
+
 ion-radio {
     --color-checked: var(--ion-color-secondary);
     --color: var(--ion-color-dark-text);
@@ -58,19 +63,22 @@ ion-radio {
     height: 2.7em !important;
     font-size: 1em;
     font-weight: 500;
-    color: var(--ion-color-tertiary);
-    background-color: var(--ion-color-light);
-}
-
-// tira a borda dos input e deixa igual o ion-input
-input {
-    border: 0;
+    color: white;
+    background-color: var(--ion-color-primary);
 }
 
 .error-message {
     font-weight: bold;
     color: #b94a48;
     font-size: 10px;
+}
+
+// estilo de modal que ocupa a tela toda
+.default-modal .modal-wrapper {
+    height: 100%;
+    // top: 10%;
+    position: absolute;
+    display: block;
 }
 
 // padroniza o tamanho da fonte
@@ -87,7 +95,7 @@ ion-select {
 }
 
 ion-input {
-    font-size: 12px !important;
+    font-size: 13px !important;
 }
 
 ion-textarea {

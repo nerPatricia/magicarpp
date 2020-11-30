@@ -1,3 +1,4 @@
+import { LoadingService } from './../../service/loading.service';
 import { ToastService } from '../../service/toast.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -24,6 +25,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [CardListPage],
-  providers: [ToastService]
+  providers: [ToastService, LoadingService]
 })
 export class CardListPageModule {}

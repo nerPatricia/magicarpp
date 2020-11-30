@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Investigação Indiscreta</name>
-    <description>Projeto 1 de matematica discreta.</description>
+    <name>Magica(r)pp</name>
+    <description>Projeto de Banco de Dados 2</description>
     <author email="pcostak@gmail.com" href="http://github.com/nerPatricia">Patrícia Costa</author>
     <content src="index.html" />
     <access origin="*" />

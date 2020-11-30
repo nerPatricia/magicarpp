@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, AfterViewInit, OnChanges } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -7,11 +7,13 @@ import { Router } from '@angular/router';
   templateUrl: 'app-rank-list.html',
   styleUrls: ['app-rank-list.scss']
 })
-export class AppRankListComponent {
+export class AppRankListComponent implements OnChanges {
   @Input()
-  cardList: any = [];
+  allCards: any = [];
   @Input()
-  tipo = 1 // 1 é altas e 2 é baixas
+  currency = 'usd';
+  @Input()
+  rankFlag = 'altas';
 
   @Output()
   public eventEmitter: EventEmitter<any> = new EventEmitter();
@@ -20,6 +22,12 @@ export class AppRankListComponent {
     public navCtrl: NavController, 
     private router: Router
   ) {}
+
+  ngOnChanges() {
+    console.log(this.allCards);
+    console.log(this.currency);
+    console.log(this.rankFlag);
+  }
 
   goToCardDetails() {
     // this.navCtrl.navigateForward('/adicionar-creditos');

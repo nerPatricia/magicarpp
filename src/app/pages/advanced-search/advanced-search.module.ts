@@ -7,13 +7,7 @@ import { AdvancedSearchPage } from './advanced-search.page';
 import { Routes, RouterModule } from '@angular/router';
 import { AppHeaderModule } from 'src/app/components/app-header/app-header.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-const routes: Routes = [
-  {
-    path: '',
-    component: AdvancedSearchPage
-  }
-];
+import { NgxCurrencyModule } from 'ngx-currency';
 
 @NgModule({
   imports: [
@@ -22,8 +16,8 @@ const routes: Routes = [
     IonicModule,
     ReactiveFormsModule,
     AppHeaderModule,
-    NgxMaskModule.forRoot(),
-    RouterModule.forChild(routes)
+    NgxCurrencyModule,
+    NgxMaskModule.forRoot()
   ],
   declarations: [AdvancedSearchPage],
   providers: [ToastService]

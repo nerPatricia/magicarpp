@@ -1,29 +1,19 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      <span>Magica(r)pp</span>
+      <div class="ion-text-center"><img src="assets/imgs/logo.png" /></div>
     </ion-title>
     <ion-menu-button style="color: white" slot="start" autoHide="true"></ion-menu-button>
 
-    <!-- aqui tem que dar um pop pra ultima pagina que foi navegado e nao pro dash-->
-    <!-- <ion-buttons *ngIf="showButtonBack != ''" slot="start">
-      <ion-back-button [defaultHref]="showButtonBack"></ion-back-button>
-    </ion-buttons> -->
-
-    <!-- <ion-buttons *ngIf="showButtonLogout" slot="start" (click)="logout()">
-      <ion-icon style="margin-left: 10px; margin-right: 0;" class="icon" name="log-out-outline"></ion-icon>
-    </ion-buttons>
-
-    <ion-buttons *ngIf="showButtonHelp" slot="end" (click)="helpModal()">
-      <ion-icon class="icon" name="help-circle"></ion-icon>
-    <\/ion-buttons>
-
-    <ion-buttons *ngIf="showButtonAddCredits" slot="end" (click)="goToAddCredits()">
-      <ion-icon class="icon" name="add-circle"></ion-icon>
-    </ion-buttons> -->
+    <ion-item slot="end" lines="none">
+      <ion-select [(ngModel)]="currency" (ionChange)="changeCurrency($event)">
+        <ion-select-option value="usd">Dólar</ion-select-option>
+        <ion-select-option value="eur">Euro</ion-select-option>
+      </ion-select>
+    </ion-item>
   </ion-toolbar>
   <ion-searchbar [(ngModel)]="searchInput" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"
     placeholder="Procure por cards">
   </ion-searchbar>
-  <p id="adv-search">Busca Avançada</p>
+  <p id="adv-search" (click)="sendSearchInputToModal()">Busca Avançada</p>
 </ion-header>
