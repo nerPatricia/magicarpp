@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>
       <div *ngIf="logo" class="ion-text-center" (click)="goToHome()"><img src="assets/imgs/logo.png" /></div>
-      <span *ngIf="!logo" style="color: white;">BUSCA AVANÇADA</span>
+      <span *ngIf="!logo" style="color: white;">{{ title }}</span>
     </ion-title>
     <ion-menu-button *ngIf="allOptions" style="color: white" slot="start" autoHide="true"></ion-menu-button>
 
@@ -17,8 +17,15 @@
       </ion-select>
     </ion-item>
   </ion-toolbar>
-  <ion-searchbar *ngIf="allOptions" [(ngModel)]="searchInput" (ionInput)="onInput($event)"
-    (ionCancel)="onCancel($event)" placeholder="Procure por cards">
-  </ion-searchbar>
+  <div class="search-item" *ngIf="allOptions">
+    <ion-item>
+      <ion-icon name="search-outline" slot="end" (click)="search()"></ion-icon>
+      <ion-input type="text" [(ngModel)]="card.name" placeholder="Procure por cards">
+      </ion-input>
+    </ion-item>
+  </div>
+  <!-- <ion-searchbar *ngIf="allOptions" [(ngModel)]="searchInput" (ionInput)="onInput($event)"
+    (ionCancel)="onCancel($event)" placeholder="Procure por cards"> 
+  </ion-searchbar> -->
   <p id="adv-search" *ngIf="allOptions" (click)="sendSearchInputToModal()">Busca Avançada</p>
 </ion-header>

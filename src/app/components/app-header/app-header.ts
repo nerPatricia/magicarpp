@@ -1,6 +1,8 @@
+import { ToastService } from './../../service/toast.service';
+import { EndpointService } from './../../service/endpoint.service';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -18,11 +20,26 @@ export class AppHeaderComponent {
   @Input()
   showSelectCurrency: boolean = true;
   @Input()
-  title: string;
+  title: string = 'BUSCA AVANÇADA';
   @Input()
   iconTitle: string = '';
 
   currency = 'usd';
+  card: any = {
+    name: ' ',
+    collection: '', // um select a partir de um getAllCollections
+    usd_max: '',
+    eur_max: '',
+    usd_min: '',
+    eur_min: '',
+    cmc: '',
+    rarity: '', // raridades são valores fixos
+    legalities: '', // legalities são valores fixos
+    power: '',
+    toughness: '',
+    keywords: '',
+    color: '' // W U B R G Z (colorless)
+  };
 
   @Output()
   public eventEmitter: EventEmitter<any> = new EventEmitter();
@@ -31,7 +48,9 @@ export class AppHeaderComponent {
 
   constructor(
     public navCtrl: NavController, 
-    private router: Router
+    private router: Router,
+    private endpoint: EndpointService,
+    private toast: ToastService
   ) {}
 
   goToHome() {
@@ -54,12 +73,20 @@ export class AppHeaderComponent {
     });
   }
 
-  onInput(event) {
-
+  search() {
+    this.endpoint.searchCard(this.card).then(
+      (response: any) => {
+        const navigationExtras: NavigationExtras = {
+          state: { 
+            cardList: response,
+            currency: this.currency
+          }
+        };
+        this.router.navigate(['card-list'], navigationExtras);
+      }, error => {
+        this.toast.present({ message: 'Nenhum resultado encontrado' });
+        console.log(error);
+      }
+    );
   }
-
-  onCancel(event) {
-    
-  }
-
 }

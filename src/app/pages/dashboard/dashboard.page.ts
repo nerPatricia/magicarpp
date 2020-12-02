@@ -1,6 +1,7 @@
+import { Chart } from 'chart.js';
 import { NavController } from '@ionic/angular';
-import { Component } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
 import { format, isBefore } from 'date-fns';
 
 @Component({
@@ -8,45 +9,63 @@ import { format, isBefore } from 'date-fns';
   templateUrl: 'dashboard.page.html',
   styleUrls: ['dashboard.page.scss'],
 })
-export class DashboardPage  {
-  saldo = "0";
-  carrosList = [];
-  today = new Date();
+export class DashboardPage implements OnInit {
+  currency = 'usd';
+  chart: any;
+  cardDetails: any = {};
+
+  @ViewChild('lineChart') lineChart;
 
   constructor(
     private navCtrl: NavController, 
-    private router: Router
-  ) {}
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.cardDetails = this.router.getCurrentNavigation().extras.state.cardDetails;
+        this.currency = this.router.getCurrentNavigation().extras.state.currency;
+      }
+    });
+  }
 
-  startTime() {}
+  ngOnInit() {
+    
+  }
 
-  ionViewDidEnter() {
+  ionViewDidEnter(){
+    this.createBarChart();
 
   }
 
-  addCredits() {
-    this.navCtrl.navigateForward(['adicionar-creditos']);
-  }
-
-  reservarVaga(carro) {
-    const navigationExtras: NavigationExtras = {
-      state: { 
-        carroData: carro,
-        saldo: this.saldo
-       }
-    };
-    this.router.navigate(['reservar-vaga'], navigationExtras);
-  }
-
-  cadastrarVeiculo() {
-    this.navCtrl.navigateForward(['cadastrar-veiculo']);
-  }
-
-  getHoraFinal(estacionado) {
-    if (isBefore(new Date(estacionado.hora_fim), this.today)) {
-      return;
-    }
-    const horaCerta = format(new Date(estacionado.hora_fim), "HH:mm");
-    return horaCerta;
+  createBarChart() {
+    let labels = [];
+    let prices = [];
+    this.cardDetails.prices.forEach(element => {
+      labels.push(format(new Date(element.created_at), "dd-MM-yyyy")); 
+      prices.push(element.usd);
+    });
+    this.chart = new Chart(this.lineChart.nativeElement, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Variação do Preço',
+          data: prices,
+          backgroundColor: 'rgba(0,0,0,0)', // array should have same number of elements as number of dataset
+          borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: false
+            }
+          }]
+        }
+      }
+    });
   }
 }

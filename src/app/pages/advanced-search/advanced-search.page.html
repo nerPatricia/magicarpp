@@ -16,15 +16,15 @@
         <ion-col size="6" style="padding-left: 0;">
           <ion-label class="title">Preço Minimo:</ion-label>
           <ion-item>
-            <input currencyMask [(ngModel)]="this.currency === 'usd' ? card.usd_min : card.eur_min" type="tel"
-              placeholder="00,00" [options]="{ prefix: '', thousands: '.', decimal: ',' }" />
+            <input currencyMask [(ngModel)]="card.usd_min" type="tel" placeholder="00,00"
+              [options]="{ prefix: '', thousands: '.', decimal: ',' }" />
           </ion-item>
         </ion-col>
         <ion-col size="6" style="padding-right: 0;">
           <ion-label class="title">Preço Máximo:</ion-label>
           <ion-item>
-            <input currencyMask [(ngModel)]="this.currency === 'usd' ? card.usd_max : card.eur_max" type="tel"
-              placeholder="00,00" [options]="{ prefix: '', thousands: '.', decimal: ',' }" />
+            <input currencyMask [(ngModel)]="card.usd_max" type="tel" placeholder="00,00"
+              [options]="{ prefix: '', thousands: '.', decimal: ',' }" />
           </ion-item>
         </ion-col>
       </ion-row>

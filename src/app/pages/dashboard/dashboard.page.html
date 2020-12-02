@@ -1,44 +1,11 @@
-<app-header showButtonLogout="true" title="Zona Azul"></app-header>
+<app-header [showButtonBack]="true" [allOptions]="false" [title]="'VARIAÇÃO DE PREÇO'" [logo]="false"></app-header>
 
 <ion-content class="ion-padding">
   <ion-grid>
-    <ion-row style="justify-content: center; padding-bottom: 2em;">
-      <ion-col size="6" class="dash-card">
-        <span>VOCÊ POSSUI</span>
-        <br />
-        <span class="cifrao">R$</span> <span class="saldo">{{ saldo }}</span>
-        <br />
-        <span>EM SEU SALDO</span>
-        <ion-icon name="add-circle" (click)="addCredits()"></ion-icon>
-      </ion-col>
-    </ion-row>
-    <p *ngIf="carrosList.length == 0;" text-center
-      style=" color: grey !important; font-weight: bolder; font-size: 1.8rem;">
-      Você não possui nenhum veiculo cadastrado ainda. Clique a seguir para cadastrar.
-    </p>
-    <ion-row style="justify-content: center;">
-      <ion-col size="10" class="infocar-card" style="display: flex" *ngFor="let carro of carrosList">
-        <ion-col size="5">
-          <span class="title">{{ carro.carro.placa.toUpperCase() }}</span>
-          <br />
-          <span class="car">{{ carro.carro.modelo.toUpperCase() }}</span>
-        </ion-col>
-        <ion-col size="7">
-          <button class="btn" primary ion-button (click)="!carro.estacionado ? reservarVaga(carro.carro) : null">
-            {{ !carro.estacionado ? 'Estacionar' : getHoraFinal(carro.estacionado) }}
-            <ion-icon name="time-outline"></ion-icon>
-          </button>
-        </ion-col>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col class="ion-text-center" style="padding-top: 2em;">
-        <button class="btn" style="width: 80% !important; background-color: #12a9bb;" ion-button
-          (click)="cadastrarVeiculo()">
-          <ion-icon name="add" style="font-size: larger !important"></ion-icon>
-          Novo Veículo
-        </button>
-      </ion-col>
-    </ion-row>
+    <ion-item>
+      <ion-card-content style="width: 100%;">
+        <canvas #lineChart></canvas>
+      </ion-card-content>
+    </ion-item>
   </ion-grid>
 </ion-content>

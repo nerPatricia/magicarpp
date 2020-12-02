@@ -1,3 +1,5 @@
+import { ToastService } from './../../service/toast.service';
+import { EndpointService } from './../../service/endpoint.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,6 +15,7 @@ import { AppHeaderComponent } from './app-header';
     ReactiveFormsModule
   ],
   declarations: [AppHeaderComponent],
-  exports: [AppHeaderComponent]
+  exports: [AppHeaderComponent],
+  providers: [ToastService, EndpointService]
 })
 export class AppHeaderModule {}

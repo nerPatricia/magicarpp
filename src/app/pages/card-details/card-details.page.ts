@@ -60,6 +60,16 @@ export class CardDetailsPage {
     this.router.navigate(['advanced-search'], navigationExtras);
   }
 
+  redirectToGraphDetails() {
+    const navigationExtras: NavigationExtras = {
+      state: { 
+        cardDetails: this.cardDetails,
+        currency: this.currency
+      }
+    };
+    this.router.navigate(['dashboard'], navigationExtras);
+  }
+
   createBarChart() {
     let labels = [];
     let prices = [];
@@ -83,7 +93,8 @@ export class CardDetailsPage {
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero: false
+              beginAtZero: true,
+              stepSize: 0.5
             }
           }]
         }

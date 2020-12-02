@@ -11,6 +11,7 @@ export class EndpointService {
   constructor(public http: HttpClient) {}
   // name, collection, usd_max, eur_max, usd_min, eur_min, cmc, rarity, legalities, power, toughness, keywords
   async searchCard(card: any) {
+    console.log(card);
     const url = this.url + '/mongo/search?&name='+card.name+'&collection='+card.collection+'&cmc='+card.cmc+'&rarity='+card.rarity+
     '&legalities='+card.legalities+'&power='+card.power+'&toughness='+card.toughness+'&keywords='+card.keywords+
     '&usd_max='+card.usd_max+'&usd_min='+card.usd_min+'&eur_max='+card.eur_max+'&eur_min='+card.eur_min+'&colors='+card.color+'&limit=100';

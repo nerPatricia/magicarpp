@@ -6,7 +6,7 @@
     <ion-row>
       <ion-col size="6" style="text-align: center" *ngFor="let card of cardList.docs; index as i"
         (click)="goToDetails(card)">
-        <img src="{{ card.image_uris.small }}" />
+        <img *ngIf="card.image_uris" src="{{ card.image_uris.small }}" />
         <p class="title">{{ card.name }} </p>
       </ion-col>
     </ion-row>
